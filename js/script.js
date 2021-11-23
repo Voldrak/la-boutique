@@ -26,12 +26,12 @@ function createText(parent, productTitle, textPrice) {
   parent.append(title, price);
 }
 
-fetch("https://fakestoreapi.com/products") // <== importare la lista prodotti in modo remoto
-  .then((response) => response.json())
-  .then((data) => {
-    products = data;
-    renderProducts();
-  });
+// fetch("https://fakestoreapi.com/products") // <== importare la lista prodotti in modo remoto
+//   .then((response) => response.json())
+//   .then((data) => {
+//     products = data;
+//     renderProducts();
+//   });
 
 let products = [];
 const wrapperProducts = document.querySelector(".wrapper__products");
@@ -48,7 +48,7 @@ const getProductList = async() => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
 
-return renderProducts();
+return renderProducts(data);
 };
 
 getProductList();
