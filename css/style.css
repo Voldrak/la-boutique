@@ -47,6 +47,32 @@ strong {
   filter:  contrast(1.4) sepia(0.2);
 }
 
+.overlay2 {
+  position: absolute;
+  top: 0;
+  height: 350px;
+  width: 100%;
+  
+  background-image: url(https://media.istockphoto.com/photos/fashion-clothes-on-a-rack-in-a-light-background-indoors-place-for-picture-id1257563298);
+  background-position-y: 35%;
+  background-size: cover;
+
+  filter:  contrast(1.4) sepia(0.2);
+}
+
+.overlay3 {
+  position: absolute;
+  top: 0;
+  height: 350px;
+  width: 100%;
+  
+  background-image: url(https://media.istockphoto.com/photos/young-handsome-man-in-classic-suit-over-the-lake-background-picture-id1300966679);
+  background-position-y: 35%;
+  background-size: cover;
+
+  filter:  contrast(1.4) sepia(0.2);
+}
+
 .wrapper .__hero {
   position: relative;
   top: 0;
