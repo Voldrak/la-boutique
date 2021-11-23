@@ -1,4 +1,3 @@
-// import { products } from "./products.js";   <== importare la lista prodotti in modo locale
 
 function createProduct(parent, imgUrl, productTitle, textPrice) {
   const product = document.createElement("div");
@@ -37,8 +36,19 @@ fetch("https://fakestoreapi.com/products") // <== importare la lista prodotti in
 let products = [];
 const wrapperProducts = document.querySelector(".wrapper__products");
 
-function renderProducts() {
-  products.map((product) => {
+function renderProducts(listItems) {
+  listItems.map((product) => {
     createProduct(wrapperProducts, product.image, product.title, product.price);
   });
 }
+
+
+//Async await
+const getProductList = async() => {
+  const res = await fetch("https://fakestoreapi.com/products");
+  const data = await res.json();
+
+return renderProducts();
+};
+
+getProductList();
