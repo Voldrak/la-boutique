@@ -90,6 +90,28 @@ strong {
   z-index: 2;
 }
 
+.cartBanner {
+  display: flex;
+  justify-content: flex-end;
+  background-image:linear-gradient(135deg, #fff6b7 10%, #f6416c 100%);
+}
+
+.cartBanner .cartProductNum{
+  margin-right: 20px;
+}
+
+.cartBanner .clearCart {
+  border: 0;
+  background: transparent;
+  text-shadow: 2px 2px 2px white;
+  cursor: pointer;
+  transition: all 0.35s;
+}
+
+.cartBanner .clearCart:hover {
+  transform: scale(1.6);
+}
+
 .wrapper__titles {
   display: flex;
   justify-content: center;
