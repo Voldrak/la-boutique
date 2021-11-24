@@ -1,28 +1,27 @@
 function setCartProductsNum() {
-return(cartProductNum.textContent = `Numero prodotti: ${cartList.length}`
-  );
+  cartProductsNum.textContent = `Numero prodotti: ${cartList.length}`;
 }
 
 function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   const product = document.createElement("div");
   product.className = "product";
-  product.setAttribute("id", idProduct)
+  product.setAttribute("id", idProduct);
 
   createImg(product, imgUrl, productTitle);
   createText(product, productTitle, textPrice);
   parent.appendChild(product);
 
-  product.addEventListener('click', (e) => {
-  // console.log(parseInt(e.currentTarget.id));
-  cartList.push(
-    productList.find(
-      (product) => parseInt(e.currentTarget.id) === product.id));
-      setCartProductsNum()
-    alert('Prodotto aggiunto nel carrello')
-
-    localStorage.setItem('totCartitem', cartList.length)
-
-  })
+  product.addEventListener("click", (e) => {
+    cartList.push(
+      productsList.find(
+        (product) => parseInt(e.currentTarget.id) === product.id
+      )
+    );
+    setCartProductsNum();
+    alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`);
+    // Nel caso in cui volessimo aggiungere una interazione col LocalStorage
+    localStorage.setItem("totCartitems", cartList.length);
+  });
 }
 
 function createImg(parent, imgUrl, productTitle) {
@@ -47,32 +46,48 @@ function renderProducts(listItems) {
   listItems.map((product) => {
     createProduct(
       wrapperProducts,
-       product.image,
-        product.title,
-         product.price,
-          product.id
-         );
+      product.image,
+      product.title,
+      product.price,
+      product.id
+    );
   });
-  
 }
 
 // Async await
 const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
-  // productList = data;
+  productsList = data;
+
+  // Nella eventualità di aggiungere una quantità per prodotto
+  // productsList = data.map((product) => {
+  //   product.quantity = 0;
+  //   return product;
+  // });
 
   return renderProducts(data);
 };
 
+let productsList = [];
+const wrapperProducts = document.querySelector(".wrapper__products");
 
-// const prodotto = document.querySelectorAll(".wrapper__products");
+// Parte inerente alla logica del carrello
+let cartList = [];
 
-// prodotto.forEach((el) =>
-// el.addEventListener("click", (e) => {
-//   console.log(el);
-// })
-// );
+const localStorageTot = localStorage.getItem("totCartitems");
+const cartBtn = document.querySelector(".cartBtn");
+const cartProductsNum = document.querySelector(".cartProductsNum");
+const clearCartBtn = document.querySelector(".clearCart");
+
+// Flusso generale
+cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`;
+getProductsList();
+
+clearCartBtn.addEventListener("click", () => {
+  cartList.length = 0;
+  setCartProductsNum();
+});
 
 
 // Hero change img
@@ -94,31 +109,6 @@ setTimeout (() => {
 }
 
   window.onload = setInterval(function(){imgHero();}, 9000);
-
-  const wrapperProducts = document.querySelector(".wrapper__products");
-  let productList = [];
-
-
-  // PARTE INERENTE ALLA LOGICA DEL CARRELLO
-
-  const localStorage = localStorage.getItem("totCartitems")
-  const clearCartBtn = document.querySelector(".clearCartBtn")
-  const cartBtn = document.querySelector(".cartBtn");
-  const cartProductNum = document.querySelector(".cartProductNum");
-  const cartList = [];
-  
-  // FLUSSO GENERALE
-
-  cartProductNum.textContent = `Numero prodotti: ${localStorageTot}`;
-  getProductsList();
-
-
-clearCartBtn.addEventListener("click", () => {
-  cartList.length = 0;
-  setCartProductsNum();
-});
-
-
   
   // Cerca prodotto
 
