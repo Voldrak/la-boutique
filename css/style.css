@@ -23,6 +23,33 @@ strong {
   font-weight: bold;
 }
 
+.modaleAddCart{
+  border: 1px solid black;
+  position: absolute;
+  background:rgba(255, 255, 255, 0.8);
+
+  top: -500px;
+  left: 50%;
+  width: 400px;
+  height: 200px;
+
+  opacity: 1;
+  
+
+  text-align: center;
+  line-height: 200px;
+  transform: translate(-50%, -50%);
+  transition: all 1s;
+}
+
+.modaleAddC{
+ box-shadow:  0px 0px 0px 2000px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .cart {
   text-align: right;
   width: 80px;

@@ -18,9 +18,14 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
       )
     );
     setCartProductsNum();
-    alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`);
+    // alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`);
     // Nel caso in cui volessimo aggiungere una interazione col LocalStorage
-    
+
+    modale.classList.toggle("modaleAddC");
+    modaleTitle.textContent = `Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`;
+    setTimeout(() => {
+    modale.classList.toggle("modaleAddC");
+    },2000)
     localStorage.setItem("totCartitems", cartList.length);
     
 
@@ -82,21 +87,25 @@ const localStorageTot = localStorage.getItem("totCartitems");
 const cartBtn = document.querySelector(".cartBtn");
 const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCartBtn = document.querySelector(".clearCart");
+const modale = document.querySelector(".modaleAddCart");
+const modaleAddC = document.querySelector(".modaleAddC");
+const modaleTitle = document.querySelector(".modaleTitle");
 
 // Flusso generale
+
+
+
+
+getProductsList();
 
 if (localStorageTot){ 
   cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`
 };
 
-
-getProductsList();
-
-
-clearCartBtn.addEventListener("click", () => {
-  setCartProductsNum();
-  localStorage.removeItem("totCartitems");
-  
+clearCartBtn.addEventListener("click", () => {   
+    cartList.length = 0
+    localStorage.removeItem("totCartitems");
+    setCartProductsNum()
 });
 
 
