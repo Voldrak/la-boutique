@@ -1,3 +1,8 @@
+function setCartProductsNum() {
+return(cartProductNum.textContent = `Numero prodotti: ${cartList.length}`
+  );
+}
+
 function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   const product = document.createElement("div");
   product.className = "product";
@@ -12,7 +17,11 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   cartList.push(
     productList.find(
       (product) => parseInt(e.currentTarget.id) === product.id));
-    alert('prodotto aggiunto nel carrello')
+      setCartProductsNum()
+    alert('Prodotto aggiunto nel carrello')
+
+    localStorage.setItem('totCartitem', cartList.length)
+
   })
 }
 
@@ -51,7 +60,7 @@ function renderProducts(listItems) {
 const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
-  productList = data;
+  // productList = data;
 
   return renderProducts(data);
 };
@@ -86,19 +95,31 @@ setTimeout (() => {
 
   window.onload = setInterval(function(){imgHero();}, 9000);
 
-
   const wrapperProducts = document.querySelector(".wrapper__products");
-  const cartBtn = document.querySelector(".cartBtn");
-
-  const cartList = [];
   let productList = [];
 
+
+  // PARTE INERENTE ALLA LOGICA DEL CARRELLO
+
+  const localStorage = localStorage.getItem("totCartitems")
+  const clearCartBtn = document.querySelector(".clearCartBtn")
+  const cartBtn = document.querySelector(".cartBtn");
+  const cartProductNum = document.querySelector(".cartProductNum");
+  const cartList = [];
+  
+  // FLUSSO GENERALE
+
+  cartProductNum.textContent = `Numero prodotti: ${localStorageTot}`;
   getProductsList();
 
-  // cartBtn.addEventListener("click", () => {
-  //   console.log(cartList);
-  // })
 
+clearCartBtn.addEventListener("click", () => {
+  cartList.length = 0;
+  setCartProductsNum();
+});
+
+
+  
   // Cerca prodotto
 
 //   function cercalo(){
