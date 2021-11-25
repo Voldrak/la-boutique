@@ -200,3 +200,21 @@ strong {
 .product p {
   align-self: flex-end;
 }
+
+/* REVIEW */
+
+.review {
+  font-size: larger;
+  text-align: center;
+
+  margin: 15px 40%;
+  width: 400px;
+  height: 150px;
+  line-height: 40px;
+
+  border: 2px solid black;
+  background: white;
+  color: black;
+  box-shadow: 0 0 8px black;
+
+}
