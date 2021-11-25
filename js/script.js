@@ -12,6 +12,11 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   parent.appendChild(product);
 
   product.addEventListener("click", (e) => {
+    const localStorageValue = localStorage.getItem("totCartitems");
+    if(localStorageValue) {
+      cartList = JSON.parse(localStorageValue);
+    }
+    
     cartList.push(
       productsList.find(
         (product) => parseInt(e.currentTarget.id) === product.id
@@ -22,13 +27,14 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
     // Nel caso in cui volessimo aggiungere una interazione col LocalStorage
 
     modale.classList.toggle("modaleAddC");
-    modaleTitle.textContent = `Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`;
+    modaleTitle.textContent = `Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`
     setTimeout(() => {
     modale.classList.toggle("modaleAddC");
-    },2000)
-    localStorage.setItem("totCartitems", cartList.length);
+    },1500)
+    
     
 
+    localStorage.setItem("totCartitems", JSON.stringify(cartList));
   });
 }
 
@@ -94,13 +100,13 @@ const modaleTitle = document.querySelector(".modaleTitle");
 // Flusso generale
 
 
-
+const parseTotCardItemLen = JSON.parse(localStorage.getItem("totCartitems"))?.length
 
 getProductsList();
 
-if (localStorageTot){ 
-  cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`
-};
+
+  cartProductsNum.textContent = `Numero prodotti: ${parseTotCardItemLen || 0}`
+
 
 clearCartBtn.addEventListener("click", () => {   
     cartList.length = 0
